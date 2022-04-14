@@ -1,6 +1,6 @@
 {% set name = "pysbol2" %}
 {% set pip_name = "sbol2" %}
-{% set version = "1.2" %}
+{% set version = "1.4.1" %}
 
 
 package:
@@ -9,7 +9,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ pip_name[0] }}/{{ pip_name }}/{{ pip_name }}-{{ version }}.tar.gz
-  sha256: 0699bd4c5fc57ec4620f9f81473bc0e619161fbd2b2eed77e23848b1e40fce01
+  sha256: e43725df270718489c75392d00ac633165ed87f2f33898105649a6bea122c035
 
 build:
   noarch: python
