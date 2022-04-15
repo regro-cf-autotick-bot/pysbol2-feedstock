@@ -1,27 +1,25 @@
 {% set name = "pysbol2" %}
-{% set pip_name = "sbol2" %}
-{% set version = "1.2" %}
-
+{% set version = "v1.4.1" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ pip_name[0] }}/{{ pip_name }}/{{ pip_name }}-{{ version }}.tar.gz
-  sha256: 0699bd4c5fc57ec4620f9f81473bc0e619161fbd2b2eed77e23848b1e40fce01
+  url: https://github.com/SynBioDex/pySBOL2/archive/{{ version }}.tar.gz
+  sha256: 7adf62fb7edb204b27893ecaedc98bac6269c6734a5fb1717fd98d694b277391
 
 build:
-  noarch: python
   number: 0
-  script: {{ PYTHON }} -m pip install --no-deps . -vv
+  noarch: python
+  script: {{ PYTHON }} -m pip install -vv .
 
 requirements:
   host:
-    - python >=3.6
+    - python >=3.7
     - pip
   run:
-    - python >=3.6
+    - python >=3.7
     - deprecated
     - lxml
     - packaging >=20.0
@@ -29,17 +27,24 @@ requirements:
     - rdflib >=5.0
     - requests
     - urllib3
+    - openjdk
 
 test:
+  source_files:
+    - test
+    - examples
   imports:
     - sbol2
   commands:
     - pip check
+    - git clone --recurse-submodules https://github.com/SynBioDex/pySBOL2.git && cp -r pySBOL2/test/SBOLTestSuite test/.
+    - python -m unittest discover -s test
   requires:
     - pip
+    - git
 
 about:
-  home: https://github.com/SynBioDex/pySBOL2
+  home: https://github.com/SynBioDex/pySBOL2/
   summary: Pure Python implementation of SBOL 2 standard
   license: Apache-2.0
   license_file: LICENSE.txt
@@ -53,3 +58,4 @@ about:
 extra:
   recipe-maintainers:
     - tduigou
+    - kenza12
