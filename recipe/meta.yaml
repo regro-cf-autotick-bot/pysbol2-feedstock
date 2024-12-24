@@ -10,16 +10,16 @@ source:
   sha256: 7adf62fb7edb204b27893ecaedc98bac6269c6734a5fb1717fd98d694b277391
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: {{ PYTHON }} -m pip install -vv .
 
 requirements:
   host:
-    - python >=3.7
+    - python {{ python_min }}
     - pip
   run:
-    - python >=3.7
+    - python >={{ python_min }}
     - deprecated
     - lxml
     - packaging >=20.0
@@ -42,6 +42,7 @@ test:
   requires:
     - pip
     - git
+    - python {{ python_min }}
 
 about:
   home: https://github.com/SynBioDex/pySBOL2/
